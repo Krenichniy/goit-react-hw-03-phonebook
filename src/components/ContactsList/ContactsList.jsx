@@ -3,7 +3,6 @@ import {Container, } from '../Form/Form.styled'
 import {StyledItem, StyledName, StyledNumber,StyledBtn} from './Contacts.styled'
 
 const ContactsList = ({renderList, removeItem}) => {
-    console.log(renderList);
     return (
             <Container>
         <ul>
