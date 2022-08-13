@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import {Container, } from '../Form/Form.styled'
 import {StyledItem, StyledName, StyledNumber,StyledBtn} from './Contacts.styled'
 
-const ContactsList = ({list, removeItem}) => {
+const ContactsList = ({renderList, removeItem}) => {
+    console.log(renderList);
     return (
-        <>
             <Container>
         <ul>
-             {list.map((el) => (
+             {renderList.map((el) => (
                  <StyledItem key={el.id}>
                      <StyledName>{el.name}</StyledName>:    
                      <StyledNumber>{el.tel}</StyledNumber>
@@ -15,12 +15,11 @@ const ContactsList = ({list, removeItem}) => {
                      </StyledItem>))}
                 </ul>
             </Container>
-        </>
     )
 }
 
 ContactsList.propType = {
-    list: PropTypes.array.isRequired, 
+    renderList: PropTypes.array.isRequired, 
     removeItem: PropTypes.func.isRequired
 }
 
