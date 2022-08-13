@@ -39,7 +39,8 @@ class App extends Component {
 
     newContact.id = nanoid(10)
     this.setState(preState => {
-      const contacts = [...preState.contacts, newContact]
+      const contacts = [...preState.contacts, newContact];
+      this.updateStorage(contacts);
       return { contacts }
     })
    }
@@ -67,21 +68,29 @@ class App extends Component {
   removeItem = (id) => {
     const { contacts } = this.state;
     const updatedListContacts = contacts.filter(contact => contact.id !== id);
+    this.updateStorage(updatedListContacts);
     this.setState({
       contacts: updatedListContacts
     })
   }
-//   componentDidMount() {
-//     const contacts = localStorage.getItem('contacts');
-//     const parcedContacts = JSON.parse(contacts);
-//     this.setState({contacts:parcedContacts})
-// }
+  componentDidMount() {
+    this.setState({contacts:this.getDataFromStorage()})
+}
 //   componentDidUpdate(prevProps, prevState) {
 //     if (this.state.contacts !== prevState.contacts) {
 //       localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
 //     }
 //   }
-  
+
+
+   updateStorage = (contacts) => {
+    localStorage.setItem('contacts', JSON.stringify(contacts))
+  }
+
+  getDataFromStorage() {
+    return JSON.parse(localStorage.getItem('contacts') || '[]')
+  }
+
   render() {
     const renderList = this.getFiltredList();
         return (
